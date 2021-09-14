@@ -1,0 +1,23 @@
+{
+  "name": "commandline-ssg",
+  "version": "0.0.1",
+  "description": "commandline tool to generate static site",
+  "bin": {
+    "commandline-ssg": "./src/index.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "commandline-ssg"
+  ],
+  "author": "Ritik Bheda",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^8.2.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
