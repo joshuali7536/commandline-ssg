@@ -17,7 +17,7 @@ function loopThroughAllFiles(options, otherFolderPath= ""){ // this is a recursi
             const filePath = process.cwd() + '\\' + options.output +'\\' + 'index.html';
             fs.appendFileSync(filePath, toReturn, function(err) {
                 if(err) throw err;
-                console.log("HTML file successfullly completed");
+                console.log("HTML file successfully completed");
             })
         }
         else{
