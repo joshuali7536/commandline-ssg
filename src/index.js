@@ -2,8 +2,9 @@
 
 const { program } = require("commander");
 const fileFolder = require("./fileFolder/index");
+const pjson = require('./../package.json');
 
-program.version('0.0.1', '-v, --version','shows the current version of the commandline-ssg tool');
+program.version(pjson.version, '-v, --version','shows the current version of the commandline-ssg tool');
 
 program
     .option("-i, --input <type>", "enter the file/folder name to generate its HTML files")
