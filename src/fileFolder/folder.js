@@ -13,7 +13,7 @@ function loopThroughAllFiles(options, otherFolderPath= ""){ // this is a recursi
         const stats = fs.statSync(folderPath +"\\"+ filename);
         if(stats.isFile()){
             file.parseTxttoHTML(folderPath +"\\"+ filename, options.output, options.stylesheet);
-            const toReturn = `<h1><a href="${process.cwd() + '\\' + options.output +'\\' + path.basename(filename, '.txt') + ".html"}">${path.basename(filename, '.txt')}</a></h1>`;
+            const toReturn = `<h1><a href="${"\.\\" +path.basename(filename, '.txt') + ".html"}">${path.basename(filename, '.txt')}</a></h1>`;
             const filePath = process.cwd() + '\\' + options.output +'\\' + 'index.html';
             fs.appendFileSync(filePath, toReturn, function(err) {
                 if(err) throw err;

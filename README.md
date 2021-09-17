@@ -12,8 +12,8 @@ The tool is before its first release but comes up with these features already:
 * if the provided file is not a text file, it exits the program soundly
 * if a folder is provided, a new file called `index.html` is generated which contains link to all the files just generated
 
-## Options
-
+## Usage
+### Options
 Option | Function
 ------------ | -------------
 -h, --help | shows all the options currently active
@@ -22,6 +22,7 @@ Option | Function
 -o, --output \<type> | takes destination folder location
 -s, --stylesheet \<type\> | takes any stylesheet that needs to be added to the html 
 
+## Options
 
 ### Help
 This option shows all the currently available options that can be used. It can be used in two ways `-h` or `--help`.<br>
@@ -97,6 +98,6 @@ a foo.html file will be generated in the HTMLFolder with the https://cdnjs.cloud
 
 ## Links
 
-+ [GitHub Repo](https://github.com/ritikbheda/commandline-ssg)
-+ [GitHub Pages README](https://ritikbheda.github.io/commandline-ssg/)
-+ [GitHub Pages](https://ritikbheda.github.io/commandline-ssg/dist/index.html)
+[GitHub Repo]()
+[GitHub Pages README]()
+[GitHub Pages]()
