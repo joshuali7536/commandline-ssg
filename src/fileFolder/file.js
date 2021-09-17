@@ -51,7 +51,7 @@ function parseTxttoHTML(filename, destination, stylesheet){
 
     }
     else{
-        console.log("It is not a text file. Please enter a text file.")
+        console.log(`"${path.basename(filename)}" is not a text file. Please enter a text file.`)
     }
 }
 
