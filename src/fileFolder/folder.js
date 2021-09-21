@@ -8,13 +8,14 @@ function loopThroughAllFiles(options, otherFolderPath= ""){ // this is a recursi
      * if a file, send the call to parse the file, append the index.html file
      * if a folder, loop that folder.
      */
-    const folderPath = process.cwd() + '\\' + options.input+ '\\' + otherFolderPath;
+    const folderPath = path.join(process.cwd(), options.input, otherFolderPath);
+
     fs.readdirSync(folderPath).forEach(filename => {
-        const stats = fs.statSync(folderPath +"\\"+ filename);
+        const stats = fs.statSync(path.join(folderPath, filename));
         if(stats.isFile()){
-            file.parseTxttoHTML(folderPath +"\\"+ filename, options.output, options.stylesheet);
-            const toReturn = `<h1><a href="${"\.\\" +path.basename(filename, '.txt') + ".html"}">${path.basename(filename, '.txt')}</a></h1>`;
-            const filePath = process.cwd() + '\\' + options.output +'\\' + 'index.html';
+            file.parseTxttoHTML(path.join(folderPath, filename), options.output, options.stylesheet);
+            const toReturn = `<h1><a href="${path.join("\.\\", path.basename(filename, '.txt')) + ".html"}">${path.basename(filename, '.txt')}</a></h1>`;
+            const filePath = path.join('./', options.output, 'index.html');
             fs.appendFileSync(filePath, toReturn, function(err) {
                 if(err) throw err;
                 console.log("HTML file successfully completed");

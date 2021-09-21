@@ -39,7 +39,7 @@ function parseTxttoHTML(filename, destination, stylesheet){
                     ).join(' ');
                 
                 const toReturn = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title}</h1> ${html} </body></html>`;
-                const newFilePath = process.cwd() + '\\'+ destination + '\\' + path.basename(filename, '.txt') + ".html";
+                const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.txt')) + ".html";
                 
                 fs.writeFile(newFilePath, toReturn, function (err){
                     if(err) throw err;
