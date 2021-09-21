@@ -43,7 +43,7 @@ function createDestination(destination){
         })
     }
     catch(err){
-        
+        console.error(err);
     }
     fs.mkdirSync(path.join(process.cwd(), destination), {recursive: true}, (err) =>{
         if(err){
