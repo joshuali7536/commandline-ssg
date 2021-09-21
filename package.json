@@ -15,8 +15,6 @@
   "author": "Ritik Bheda",
   "license": "MIT",
   "dependencies": {
-    "commander": "^8.2.0",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "commander": "^8.2.0"
   }
 }
