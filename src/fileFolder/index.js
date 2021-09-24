@@ -17,7 +17,7 @@ function fileFolder(options){
         const stats = fs.statSync(options.input);
         if(stats.isFile()){
             const filename = process.cwd() +'\\'+ options.input;
-            file.parseTxttoHTML(filename, options.output, options.stylesheet);
+            file.parseFile(filename, options.output, options.stylesheet);
         }
         else{
             
