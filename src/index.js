@@ -8,8 +8,9 @@ program.version(pjson.version, '-v, --version','shows the current version of the
 
 program
     .option("-i, --input <type>", "enter the file/folder name to generate its HTML files")
-    .option("-o, --output <type>", "to enter the output folder", "dist")
-    .option("-s, --stylesheet <type>", "to enter the stylesheet URL/file", "")
+    .option("-o, --output <type>", "enter the output folder", "dist")
+    .option("-s, --stylesheet <type>", "enter the stylesheet URL/file", "")
+    .option("-l, --lang <type>", "enter the language of the document", "en-CA")
     .action((options) =>{
         fileFolder(options)
     });

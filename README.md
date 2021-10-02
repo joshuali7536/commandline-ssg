@@ -3,21 +3,15 @@ Commandline Static Site Generating tool that helps you produce `.html` from `.tx
 
 ## Features
 The tool is before its first release but comes up with these features already:
-* accept `.txt` file to generate a `.html` file
-* accept folders to generate `.html` files from `.txt` files
+* accept `.txt` or `.md` file to generate a `.html` file
+* accept folders to generate `.html` files from `.txt` and `.md` files
 * goes through all the child directories  of the input folder to generate the desired files
 * output folder can be externally provided to get the generated files at desired location. if not provided, the output is generated in a folder set as default output folder
 * stylesheet can be externally provided in either link form or file form to add style to the webpages. If not provided, the no stylesheet is added to the webpages
 * detects title and paragraph of the text file to give accurate tags in the webpage and sets title to the webpage
 * if a folder is provided, a new file called `index.html` is generated which contains link to all the files just generated
+* can generate document for any language under [MDN WebDocs](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
 
-The tool can now also process `.md` files:
-* accept `.md` file to generate a `.html` file
-* accept folders to generate `.html` files from `.md` files as well (processes both `.txt` and `.md` in a folder)
-* can detect headings h1-h6 and converts them to the respective heading tag. For example:
-`## Heading 2` gets converted to `<h2>Heading 2<h2>`
-* generates paragraphs for text which is not a heading
-* detects and processes **bold** text using the double `**` or `__` syntax
 ## Usage
 ### Options
 Option | Function

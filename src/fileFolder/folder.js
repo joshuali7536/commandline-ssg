@@ -13,7 +13,8 @@ function loopThroughAllFiles(options, otherFolderPath= ""){ // this is a recursi
     fs.readdirSync(folderPath).forEach(filename => {
         const stats = fs.statSync(path.join(folderPath, filename));
         if(stats.isFile()){
-            file.parseFile(path.join(folderPath, filename), options.output, options.stylesheet);
+            options.input = path.join(folderPath, filename);
+            file.parseFile(options);
 
             let fileBaseName = '';
             if(path.extname(filename) == '.txt') fileBaseName = path.basename(filename, '.txt');
@@ -40,7 +41,7 @@ function createDestination(destination){
      */
 
     try{
-        fs.rmSync(path.join(process.cwd(), destination), {recursive: true}, (err) =>{
+        fs.rmdirSync(path.join(process.cwd(), destination), {recursive: true}, (err) =>{
             if(err){
                 throw err;
             }
