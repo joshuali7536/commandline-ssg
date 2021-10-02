@@ -10,6 +10,7 @@ The tool is before its first release but comes up with these features already:
 * stylesheet can be externally provided in either link form or file form to add style to the webpages. If not provided, the no stylesheet is added to the webpages
 * detects title and paragraph of the text file to give accurate tags in the webpage and sets title to the webpage
 * if a folder is provided, a new file called `index.html` is generated which contains link to all the files just generated
+* program exits with code 1 if something unexpected happens; if everything is working it exits with code 0
 
 The tool can now also process `.md` files:
 * accept `.md` file to generate a `.html` file
