@@ -11,31 +11,31 @@ function isTxtFile(file){
         return false;    
 }
 
-function parseFile(filename, destination, stylesheet){
+function parseFile(options){
     /**
      * Checks if the file is txt or md
      * Parses the file and generates html if the extension is supported
      * Logs an error message if file format is invalid
      */
-    if(path.extname(filename) == '.txt'){
-        parseTxttoHTML(filename, destination, stylesheet);
+    if(path.extname(options.input) == '.txt'){
+        parseTxttoHTML(options);
     }
-    else if(path.extname(filename) == '.md'){
-        parseMdToHTML(filename, destination, stylesheet);
+    else if(path.extname(options.input) == '.md'){
+        parseMdToHTML(options);
     }
     else{
-        console.log(`"${path.basename(filename)}" is not a supported format. Please use a .txt or .md file!`)
+        console.log(`"${path.basename(options.input)}" is not a supported format. Please use a .txt or .md file!`)
         process.exit(1);
     }
 }
 
-function parseMdToHTML(filename, destination, stylesheet){
+function parseMdToHTML(options){
     /**
      * create new html file at the destination
      * Parse the data from md file and add it to the html file
      */
-
-     fs.readFile(filename, 'utf-8',  function(err, data){
+    const {filename, destination, stylesheet, lang} = options;
+    fs.readFile(filename, 'utf-8',  function(err, data){
 
         if(err){
             console.error(err);
@@ -65,7 +65,7 @@ function parseMdToHTML(filename, destination, stylesheet){
                 .replace(/__(\S[\s\S]*?)__/gim, '<strong>$1</strong>')
                 .replace(/\*\*(\S[\s\S]*?)\*\*/gim, '<strong>$1</strong>');
 
-            const toReturn = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title>${stylesheet ? `<link rel="stylesheet" href="${stylesheet}">` : ''}<meta name="viewport" content="width=device-width, initial-scale=1"></head><body>${htmlBody}</body></html>`;
+            const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title}</title>${stylesheet ? `<link rel="stylesheet" href="${stylesheet}">` : ''}<meta name="viewport" content="width=device-width, initial-scale=1"></head><body>${htmlBody}</body></html>`;
             const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.md')) + ".html";
 
             fs.writeFile(newFilePath, toReturn, function (err){
@@ -75,13 +75,14 @@ function parseMdToHTML(filename, destination, stylesheet){
     }) 
 }
 
-function parseTxttoHTML(filename, destination, stylesheet){
+function parseTxttoHTML(options){
 
     /**
      * Create new html file at the destination
      * Parse the data from txt file and add it to the html file
      */
-     fs.readFile(filename, 'utf-8',  function(err, data){
+    const {input: filename, output: destination, stylesheet, lang} = options;
+    fs.readFile(filename, 'utf-8',  function(err, data){
 
         if(err){
             console.error(err);
@@ -98,7 +99,7 @@ function parseTxttoHTML(filename, destination, stylesheet){
                 `<p>${para.replace(/\r?\n/, ' ')}</p>`
                 ).join(' ');
             
-            const toReturn = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title}</h1> ${html} </body></html>`;
+            const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title}</h1> ${html} </body></html>`;
             const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.txt')) + ".html";
             
             fs.writeFile(newFilePath, toReturn, function (err){
