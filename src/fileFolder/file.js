@@ -25,6 +25,7 @@ function parseFile(filename, destination, stylesheet){
     }
     else{
         console.log(`"${path.basename(filename)}" is not a supported format. Please use a .txt or .md file!`)
+        process.exit(1);
     }
 }
 

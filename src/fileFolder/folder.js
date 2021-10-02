@@ -16,8 +16,14 @@ function loopThroughAllFiles(options, otherFolderPath= ""){ // this is a recursi
             file.parseFile(path.join(folderPath, filename), options.output, options.stylesheet);
 
             let fileBaseName = '';
-            if(path.extname(filename) == '.txt') fileBaseName = path.basename(filename, '.txt');
-            else if(path.extname(filename) == '.md') fileBaseName = path.basename(filename, '.md'); 
+            if(path.extname(filename) == '.txt') 
+                fileBaseName = path.basename(filename, '.txt');
+            else if(path.extname(filename) == '.md') 
+                fileBaseName = path.basename(filename, '.md')
+            else{   
+                console.log("Only .txt or .md files are accepted");
+                process.exit(1);
+            }
 
             const toReturn = `<h1><a href="${path.join("\.\\", fileBaseName) + ".html"}">${fileBaseName}</a></h1>`;
             const filePath = path.join('./', options.output, 'index.html');

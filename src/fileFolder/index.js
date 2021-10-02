@@ -40,7 +40,8 @@ function fileFolder(options){
 
     }
     else{
-        console.log("no such file/folder")
+        console.error("no such file/folder");
+        process.exit(1);
     }
 }
 
