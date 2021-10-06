@@ -22,6 +22,7 @@ Option | Function
 -i, --input \<type> | takes input of the file/folder
 -o, --output \<type> | takes destination folder location
 -s, --stylesheet \<type\> | takes any stylesheet that needs to be added to the html 
+-c, --config \<type> | takes a JSON file with options
 
 ## Options
 
@@ -53,6 +54,11 @@ Example:
 This option takes in the stylesheet that adds style to each html file generated. It can be passed as either link or file. If it is not provided, no stylesheet is added to the webpages. It can be used in two ways, `-s` or `--stylesheet`.<br>
 Example:
 > $ commandline-ssg -i foo.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css
+
+### Config
+This option reads a given JSON file for the above options and applies the options to the resulting HTML. This will overwrite other commandline argument options. If an option is not provided in the JSON it will result to the default value. It can be used in two ways, `-c` or `--config`.<br>
+Example:
+> $ commandline-ssg -c config.json
 
 ## Sample Use
 For instance, to generate html from a folder, `TextFolder`, in the project root directory in a new folder `HTMLFolder`, and add `https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css` URL stylesheet, we can write the following command:
