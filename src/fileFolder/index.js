@@ -13,35 +13,7 @@ function fileFolder(options) {
      */
     if (options.config) {
         console.log("Entered config");
-        //config.readConfig(options.config);
-
-        if (fs.existsSync(options.config)) {
-            var config = JSON.parse(fs.readFileSync(options.config));
-
-            if (config.input) {
-                console.log(config.input);
-                options.input = config.input;
-            }
-            if (config.output) {
-                console.log(config.output);
-                options.output = config.output;
-            }
-            if (config.lang) {
-                console.log(config.lang);
-                options.lang = config.lang;
-            }
-            if (config.stylesheet) {
-                console.log(config.stylesheet);
-                options.stylesheet = config.stylesheet;
-            }
-
-        }
-        else {
-            console.error("no such config file");
-            process.exit(1);
-        }
-
-
+        config.readConfig(options);
     }
 
     folder.createDestination(options.output);
