@@ -29,23 +29,15 @@ function readConfig(options) {
                 process.exit(1);
             }
             
-
-            if (config.input) {
-                console.log(config.input);
+            //Checking for valid options
+            if (config.input)
                 options.input = config.input;
-            }
-            if (config.output) {
-                console.log(config.output);
+            if (config.output)
                 options.output = config.output;
-            }
-            if (config.lang) {
-                console.log(config.lang);
+            if (config.lang)
                 options.lang = config.lang;
-            }
-            if (config.stylesheet) {
-                console.log(config.stylesheet);
+            if (config.stylesheet)
                 options.stylesheet = config.stylesheet;
-            }
         }
         else{
             console.error("config file is not a JSON");

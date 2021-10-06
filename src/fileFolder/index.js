@@ -12,7 +12,6 @@ function fileFolder(options) {
      * if folder, create the index file, send the call to loop through the folder
      */
     if (options.config) {
-        console.log("Entered config");
         config.readConfig(options);
     }
 
