@@ -11,6 +11,7 @@ program
     .option("-o, --output <type>", "enter the output folder", "dist")
     .option("-s, --stylesheet <type>", "enter the stylesheet URL/file", "")
     .option("-l, --lang <type>", "enter the language of the document", "en-CA")
+    .option("-c, --config <type>", "enter a JSON config file to generate HTML files from it")
     .action((options) =>{
         fileFolder(options)
     });
