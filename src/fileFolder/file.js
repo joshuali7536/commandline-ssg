@@ -34,7 +34,7 @@ function parseMdToHTML(options){
      * create new html file at the destination
      * Parse the data from md file and add it to the html file
      */
-    const {filename, destination, stylesheet, lang} = options;
+    const {input: filename, output: destination, stylesheet, lang} = options;
     fs.readFile(filename, 'utf-8',  function(err, data){
 
         if(err){
