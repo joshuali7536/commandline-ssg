@@ -58,6 +58,11 @@ function parseMdToHTML(options){
                 .replace(/\~\~(.*)\~\~/gim, '<del>$1</del>')
                 .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
                 .replace(/^<http(.*)$/gim, "<a href='http$1'>http$1</a>")
+                .replace(/^> (.*$)/gim, '<code>$1</code>')
+                
+                
+
+
           
                 const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title[0].slice(2)}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title[0].slice(2)}</h1> ${body} </body></html>`;
                 const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.md')) + ".html";
