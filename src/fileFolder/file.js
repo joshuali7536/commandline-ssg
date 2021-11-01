@@ -41,36 +41,37 @@ function parseMdToHTML(options){
             console.error(err);
         }
         else{
-            const paras = data.split(/\r?\n/);
+          
+            const title = data.match(/^# (.*$)/gim);
+            const body = data
+                .replace(/(^[a-z](.*)$)/gim,'<p>$1</p>')
+                .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
+                .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
+                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '')
+                .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+                .replace(/\_\_(.*)\_\_/gim, '<b>$1</b>')
+                .replace(/\_(.*)\_/gim, '<i>$1</i>')
+                .replace(/\*(.*)\*/gim, '<i>$1</i>')
+                .replace(/\~\~(.*)\~\~/gim, '<del>$1</del>')
+                .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+                .replace(/^<http(.*)$/gim, "<a href='http$1'>http$1</a>")
+                .replace(/^> (.*$)/gim, '<code>$1</code>')
+                
+                
 
-            let htmlBody = '', title = '';
 
-            //Paragraphs and headings
-            paras.forEach(para => {
-                para = para.trim();
-
-                if(para[0] == '#'){
-                    let level = (para.match(/#/g)||[]).length;
-
-                    htmlBody += level <= 6 ? `<h${level}>${para.slice(level).trim()}</h${level}>` : `<p>${para}</p>`;
-                    title = title == '' && level == 1 ? para.slice(level).trim() : title;
-                }
-                else if(para){
-                    htmlBody += `<p>${para}</p>`;
-                }
-            })
-
-            //Bold
-            htmlBody = htmlBody
-                .replace(/__(\S[\s\S]*?)__/gim, '<strong>$1</strong>')
-                .replace(/\*\*(\S[\s\S]*?)\*\*/gim, '<strong>$1</strong>');
-
-            const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title}</title>${stylesheet ? `<link rel="stylesheet" href="${stylesheet}">` : ''}<meta name="viewport" content="width=device-width, initial-scale=1"></head><body>${htmlBody}</body></html>`;
-            const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.md')) + ".html";
-
-            fs.writeFile(newFilePath, toReturn, function (err){
-                if(err) throw err;
-            });
+          
+                const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title[0].slice(2)}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title[0].slice(2)}</h1> ${body} </body></html>`;
+                const newFilePath = path.join(process.cwd(), destination, path.basename(filename, '.md')) + ".html";
+            
+                fs.writeFile(newFilePath, toReturn, function (err){
+                    if(err) throw err;
+                    //console.log("file created!")
+                });
+          
         }    
     }) 
 }
