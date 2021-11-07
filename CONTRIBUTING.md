@@ -6,7 +6,6 @@ Suggestions and pull requests are highly encouraged! Have a look at the [open is
 
 [Node.js](https://nodejs.org/en/download/) version 16 or later is required.
 
-
 ## Workflow
 
 First clone:
