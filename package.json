@@ -6,7 +6,11 @@
     "commandline-ssg": "./src/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write \"./**/*.{md,json,html,js}\"",
+    "prettier-check": "prettier --check \"./**/*.{md,json,html,js}\"",
+    "lint": "npm run eslint",
+    "prepare": "husky install"
   },
   "keywords": [
     "cli",
@@ -23,16 +27,5 @@
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
     "prettier": "2.4.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commits": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md,html}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
   }
 }
