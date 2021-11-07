@@ -1,6 +1,4 @@
 const fs = require("fs");
-const file = require("./file");
-const folder = require("./folder");
 const path = require("path");
 
 function resetOptions(options) {

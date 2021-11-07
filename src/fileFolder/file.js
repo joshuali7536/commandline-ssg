@@ -1,14 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 
-function isTxtFile(file) {
-  /**
-   * check if the file is text file or no
-   */
-  if (path.extname(file) == ".txt") return true;
-  else return false;
-}
-
 function parseFile(options) {
   /**
    * Checks if the file is txt or md
