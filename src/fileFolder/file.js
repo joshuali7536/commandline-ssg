@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { encodeHTML } = require("./../helper/encodeHTML");
 
 function parseFile(options) {
   /**
@@ -21,6 +22,27 @@ function parseFile(options) {
   }
 }
 
+function parseMd(string) {
+  const body = string
+    .replace(/(^[a-z](.*)$)/gim, "<p>$1</p>")
+    .replace(/^###### (.*$)/gim, "<h6>$1</h6>")
+    .replace(/^##### (.*$)/gim, "<h5>$1</h5>")
+    .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
+    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+    .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
+    .replace(/\_\_(.*)\_\_/gim, "<b>$1</b>")
+    .replace(/\_(.*)\_/gim, "<i>$1</i>")
+    .replace(/\*(.*)\*/gim, "<i>$1</i>")
+    .replace(/\~\~(.*)\~\~/gim, "<del>$1</del>")
+    .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+    .replace(/^<http(.*)>$/gim, "<a href='http$1'>http$1</a>")
+    .replace(/^> (.*$)/gim, "<code>$1</code>");
+
+  return body;
+}
+
 function parseMdToHTML(options) {
   /**
    * create new html file at the destination
@@ -32,28 +54,15 @@ function parseMdToHTML(options) {
       console.error(err);
     } else {
       const title = data.match(/^# (.*$)/gim);
-      const body = data
-        .replace(/(^[a-z](.*)$)/gim, "<p>$1</p>")
-        .replace(/^###### (.*$)/gim, "<h6>$1</h6>")
-        .replace(/^##### (.*$)/gim, "<h5>$1</h5>")
-        .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
-        .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-        .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-        .replace(/^# (.*$)/gim, "")
-        .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
-        .replace(/\_\_(.*)\_\_/gim, "<b>$1</b>")
-        .replace(/\_(.*)\_/gim, "<i>$1</i>")
-        .replace(/\*(.*)\*/gim, "<i>$1</i>")
-        .replace(/\~\~(.*)\~\~/gim, "<del>$1</del>")
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-        .replace(/^<http(.*)$/gim, "<a href='http$1'>http$1</a>")
-        .replace(/^> (.*$)/gim, "<code>$1</code>");
+      const body = parseMd(data);
 
-      const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title[0].slice(
-        2
-      )}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title[0].slice(
-        2
-      )}</h1> ${body} </body></html>`;
+      const toReturn = encodeHTML(lang, title[0].slice(2), stylesheet, body);
+
+      // const toReturn = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${title[0].slice(
+      //   2
+      // )}</title><link rel="stylesheet" href="${stylesheet}"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><h1>${title[0].slice(
+      //   2
+      // )}</h1> ${body} </body></html>`;
       const newFilePath =
         path.join(process.cwd(), destination, path.basename(filename, ".md")) +
         ".html";
@@ -100,4 +109,4 @@ function parseTxttoHTML(options) {
   });
 }
 
-module.exports = { parseFile };
+module.exports = { parseFile, parseMd };
